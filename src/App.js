@@ -1,27 +1,24 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import { Provider } from 'react-redux';
-import store from './store'
-import Home from './pages/Home';
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import { withAuthentication } from './Session';
+import * as ROUTES from './constants/routes';
+import Navigation from './components/Navigation';
+import { Landing, SignUp, SignIn, PasswordForgot, Home, Account, Admin } from './pages';
 
-function App() {
-  return (
-    <Provider store={store}>
-        <Router>
-            <div>
-                <nav>
-                <ul>
-                    <li>
-                    <Link to="/">Home</Link>
-                    </li>
-                </ul>
-                </nav>
+const App = () => (
+    <Router>
+        <div>
+            <Navigation />
+            <hr />
+            <Route exact path={ROUTES.LANDING} component={Landing} />
+            <Route path={ROUTES.SIGN_UP} component={SignUp} />
+            <Route path={ROUTES.SIGN_IN} component={SignIn} />
+            <Route path={ROUTES.PASSWORD_FORGOT} component={PasswordForgot} />
+            <Route path={ROUTES.HOME} component={Home} />
+            <Route path={ROUTES.ACCOUNT} component={Account} />
+            <Route path={ROUTES.ADMIN} component={Admin} />
+        </div>
+    </Router>
+);
 
-                <Route path="/" exact component={Home} />
-            </div>
-        </Router>
-    </Provider>
-  );
-}
-
-export default App;
+export default withAuthentication(App);;
