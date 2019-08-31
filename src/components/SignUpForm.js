@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import * as ROUTES from '../constants/routes';
 
 const INITIAL_STATE = {
@@ -17,12 +17,11 @@ class SignUpForm extends Component {
     }
     onSubmit = event => {
         event.preventDefault();
-        const { username, email, passwordOne } = this.state;
+        const {  email, passwordOne } = this.state;
         this.props.firebase
             .createUserWithEmailAndPassword(email, passwordOne)
             .then(authUser => {
                 this.setState({ ...INITIAL_STATE });
-                console.log(authUser);
                 this.props.history.push(ROUTES.HOME);
             })
             .catch(error => {
