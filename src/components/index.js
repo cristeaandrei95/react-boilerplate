@@ -11,3 +11,4 @@ export { default as FirebaseSignInForm } from './FirebaseSignInForm';
 export { default as FirebaseSignOutButton } from './FirebaseSignOutButton';
 export { default as PasswordForgotLink } from './PasswordForgotLink';
 export { default as Navigation } from './Navigation';
+export { default as UserList } from './UserList';

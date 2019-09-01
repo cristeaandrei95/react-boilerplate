@@ -24,6 +24,9 @@ const NavigationAuth = () => (
             <Link to={ROUTES.ACCOUNT}>Account</Link>
         </li>
         <li>
+            <Link to={ROUTES.ADMIN}>Admin</Link>
+        </li>
+        <li>
             <FirebaseSignOutButton />
         </li>
     </ul>
