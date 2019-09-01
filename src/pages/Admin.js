@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { withFirebase } from '../Firebase';
 import { UserList } from '../components';
+import { withAuthorization } from '../Session'
+import { compose } from 'recompose'
 
 class Admin extends Component {
     constructor(props) {
@@ -40,4 +42,9 @@ class Admin extends Component {
     }
 }
 
-export default withFirebase(Admin);
+const condition = authUser => !!authUser;
+
+export default compose(
+    withAuthorization(condition),
+    withFirebase
+)(Admin);
