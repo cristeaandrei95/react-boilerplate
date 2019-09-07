@@ -5,24 +5,30 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import { AuthUserContext } from '../Session';
 import { BaseButton, BaseLink, FirebaseSignOutButton } from './';
+import Box from '@material-ui/core/Box';
 
 const Autheticated = () => (
     <>
-        <BaseLink color="inherit" to={ROUTES.HOME}>
-            Home
-        </BaseLink>
-        <BaseLink color="inherit" to={ROUTES.ACCOUNT}>
-            Account
-        </BaseLink>
-        <BaseLink color="inherit" to={ROUTES.ADMIN}>
-            Admin
-        </BaseLink>
-
+        <Box>
+            <BaseLink color="inherit" to={ROUTES.HOME}>
+                Home
+            </BaseLink>
+        </Box>
+        <Box ml={2}>
+            <BaseLink color="inherit" to={ROUTES.ACCOUNT}>
+                Account
+            </BaseLink>
+        </Box>
+        <Box ml={2}>
+            <BaseLink color="inherit" to={ROUTES.ADMIN}>
+                Admin
+            </BaseLink>
+        </Box>
         <Separator />
         
         <FirebaseSignOutButton color="inherit" />
     </>
-)
+);
 
 const Separator = styled.div`
     flex: 1;
@@ -44,11 +50,11 @@ const Unauthenticated = () => (
             Sign Up
         </BaseButton>
     </>
-)
+);
 
 const Navigation = () => {
     return (
-        <AppBar position="static">
+        <AppBar position="static" >
             <Toolbar>
                 <AuthUserContext.Consumer>
                     { authUser => authUser ? <Autheticated /> : <Unauthenticated /> }
@@ -56,6 +62,6 @@ const Navigation = () => {
             </Toolbar>
         </AppBar>
     );
-}
+};
 
 export default Navigation;

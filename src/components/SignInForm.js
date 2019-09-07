@@ -1,12 +1,26 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
+import styled from 'styled-components';
 import * as ROUTES from '../constants/routes';
+import TextField from '@material-ui/core/TextField';
+import Box from '@material-ui/core/Box';
+import { BaseButton } from './';
 
 const INITIAL_STATE = {
     email: '',
     password: '',
     error: null,
 };
+
+const StyledForm = styled.form`
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+`;
+
+const StyledTextField = styled(TextField)`
+    width: 100%;
+`;
 
 class SignInForm extends Component {
     constructor(props) {
@@ -34,26 +48,28 @@ class SignInForm extends Component {
         const isInvalid = password === '' || email === '';
 
         return (
-            <form onSubmit={this.onSubmit}>
-                <input
+            <StyledForm onSubmit={this.onSubmit}>
+                <StyledTextField
+                    label="email"
                     name="email"
                     value={email}
                     onChange={this.onChange}
                     type="text"
-                    placeholder="Email Address"
                 />
-                <input
+                <StyledTextField
+                    label="password"
                     name="password"
                     value={password}
                     onChange={this.onChange}
                     type="password"
-                    placeholder="Password"
                 />
-                <button disabled={isInvalid} type="submit">
-                    Sign In
-                </button>
+                <Box mt={2}>
+                    <BaseButton variant="contained" color="primary" disabled={isInvalid} type="submit">
+                        Sign In
+                    </BaseButton>
+                </Box>
                 {error && <p>{error.message}</p>}
-          </form>
+          </StyledForm>
         );
     }
 }

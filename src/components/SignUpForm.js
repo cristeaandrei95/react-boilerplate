@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
+import styled from 'styled-components';
 import * as ROUTES from '../constants/routes';
+import TextField from '@material-ui/core/TextField';
+import Box from '@material-ui/core/Box';
+import { BaseButton } from './';
 
 const INITIAL_STATE = {
     username: '',
@@ -9,6 +13,16 @@ const INITIAL_STATE = {
     passwordTwo: '',
     error: null,
 };
+
+const StyledForm = styled.form`
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+`;
+
+const StyledTextField = styled(TextField)`
+    width: 100%;
+`;
 
 class SignUpForm extends Component {
     constructor(props) {
@@ -56,40 +70,43 @@ class SignUpForm extends Component {
         username === '';
 
         return (
-            <form onSubmit={this.onSubmit}>
-                <input
+            <StyledForm onSubmit={this.onSubmit}>
+                <StyledTextField
+                    label="username"
                     name="username"
                     value={username}
                     onChange={this.onChange}
                     type="text"
-                    placeholder="Full Name"
                 />
-                <input
+                <StyledTextField
+                    label="email"
                     name="email"
                     value={email}
                     onChange={this.onChange}
                     type="text"
-                    placeholder="Email Address"
                 />
-                <input
+                <StyledTextField
+                    label="password"
                     name="passwordOne"
                     value={passwordOne}
                     onChange={this.onChange}
                     type="password"
-                    placeholder="Password"
                 />
-                <input
+                <StyledTextField
+                    label="Confirm password"
                     name="passwordTwo"
                     value={passwordTwo}
                     onChange={this.onChange}
                     type="password"
-                    placeholder="Confirm Password"
                 />
-                <button disabled={isInvalid} type="submit">
-                    Sign Up
-                </button>
+                <Box mt={2}>
+                    <BaseButton variant="contained" color="primary" disabled={isInvalid} type="submit">
+                        Sign Up
+                    </BaseButton>
+                </Box>
+
                 {error && <p>{error.message}</p>}
-          </form>
+          </StyledForm>
         );
     }
 }
