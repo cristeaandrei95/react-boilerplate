@@ -12,3 +12,5 @@ export { default as FirebaseSignOutButton } from './FirebaseSignOutButton';
 export { default as PasswordForgotLink } from './PasswordForgotLink';
 export { default as Navigation } from './Navigation';
 export { default as UserList } from './UserList';
+export { default as BaseButton } from './BaseButton';
+export { default as BaseLink } from './BaseLink';

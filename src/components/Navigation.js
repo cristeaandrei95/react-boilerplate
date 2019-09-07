@@ -1,46 +1,61 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import * as ROUTES from '../constants/routes';
-import { FirebaseSignOutButton } from './';
+import styled from 'styled-components';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
 import { AuthUserContext } from '../Session';
+import { BaseButton, BaseLink, FirebaseSignOutButton } from './';
 
-const Navigation = ({ authUser }) => (
-    <div>
-        <AuthUserContext.Consumer>
-            { authUser => authUser ? <NavigationAuth /> : <NavigationNonAuth /> }
-        </AuthUserContext.Consumer>
-    </div>
-);
+const Autheticated = () => (
+    <>
+        <BaseLink color="inherit" to={ROUTES.HOME}>
+            Home
+        </BaseLink>
+        <BaseLink color="inherit" to={ROUTES.ACCOUNT}>
+            Account
+        </BaseLink>
+        <BaseLink color="inherit" to={ROUTES.ADMIN}>
+            Admin
+        </BaseLink>
 
-const NavigationAuth = () => (
-    <ul>
-        <li>
-            <Link to={ROUTES.LANDING}>Landing</Link>
-        </li>
-        <li>
-            <Link to={ROUTES.HOME}>Home</Link>
-        </li>
-        <li>
-            <Link to={ROUTES.ACCOUNT}>Account</Link>
-        </li>
-        <li>
-            <Link to={ROUTES.ADMIN}>Admin</Link>
-        </li>
-        <li>
-            <FirebaseSignOutButton />
-        </li>
-    </ul>
-);
+        <Separator />
+        
+        <FirebaseSignOutButton color="inherit" />
+    </>
+)
 
-const NavigationNonAuth = () => (
-    <ul>
-        <li>
-            <Link to={ROUTES.LANDING}>Landing</Link>
-        </li>
-        <li>
-            <Link to={ROUTES.SIGN_IN}>Sign In</Link>
-        </li>
-    </ul>
-);
+const Separator = styled.div`
+    flex: 1;
+`;
+
+const Unauthenticated = () => (
+    <>
+        <BaseLink color="inherit" to={ROUTES.LANDING}>
+            Landing
+        </BaseLink>
+
+        <Separator />
+
+        <BaseButton color="inherit" underline="none" to={ROUTES.SIGN_IN}>
+            Sign In
+        </BaseButton>
+        <span>|</span>
+        <BaseButton color="inherit" underline="none" to={ROUTES.SIGN_UP}>
+            Sign Up
+        </BaseButton>
+    </>
+)
+
+const Navigation = () => {
+    return (
+        <AppBar position="static">
+            <Toolbar>
+                <AuthUserContext.Consumer>
+                    { authUser => authUser ? <Autheticated /> : <Unauthenticated /> }
+                </AuthUserContext.Consumer>
+            </Toolbar>
+        </AppBar>
+    );
+}
 
 export default Navigation;
